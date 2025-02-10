@@ -3,16 +3,32 @@ import React, { useEffect } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import AddCard from "./AddCard";
 import CourseCard from "./CourseCard";
+import useQueryGet from "../customHook/useQueryGet";
 
 const List = () => {
   const getList = async () => {
     const result = await axios.get(
-      "https://66e301e5494df9a478e3f4f6.mockapi.io/test/test"
+      "https://673ef547a9bc276ec4b66ea0.mockapi.io/users/user"
     );
     return result.data;
   };
 
-  const { data, status, isFetching } = useQuery("list", getList);
+  const { data, status } = useQuery("list", getList , {
+    onSuccess :data =>{
+      console.log(data)
+    },
+    onError : err =>{
+      console.log(err)
+    }
+  });
+
+  // const { data, status } = useQuery({
+  //   queryKey:'list',
+  //   queryFn: getList
+  // });
+
+  // const {data , status} = useQueryGet('list' ,"https://673ef547a9bc276ec4b66ea0.mockapi.io/users/user" )
+
 
   return (
     <div>
@@ -33,7 +49,7 @@ const List = () => {
       <div className="flex flex-wrap justify-between gap-5 w-[90%] mx-auto mt-5">
         {data &&
           data.map((item, index) => {
-            return <CourseCard item={item} />;
+            return <CourseCard key={item.id} item={item} />;
           })}
       </div>
     </div>
