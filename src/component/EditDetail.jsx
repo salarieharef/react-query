@@ -7,34 +7,34 @@ import useMutationPut from '../customHook/useMutationPut';
 const EditDetail = ({data , id}) => {
 
 
-    // const handleUpdate =async ( value) => {
-    //     const res =await axios.put(`https://673ef547a9bc276ec4b66ea0.mockapi.io/users/user/${id}` , value);
-    //     // console.log(res);
-    //     return res.data
-    // }; 
+    const handleUpdate =async ( value) => {
+        const res =await axios.put(`https://673ef547a9bc276ec4b66ea0.mockapi.io/users/user/${id}` , value);
+        // console.log(res);
+        return res.data
+    }; 
 
 
 
-    // const queryClient = useQueryClient()
+    const queryClient = useQueryClient()
 
-    // const {mutate , status } = useMutation(handleUpdate , {
-    //     onSuccess:(data)=>{
-    //         queryClient.invalidateQueries('detail')
+    const {mutate , status } = useMutation(handleUpdate , {
+        onSuccess:(data)=>{
+            queryClient.invalidateQueries('detail')
 
-    //     }, 
+        }, 
 
-    // })
+    })
 
-    // const handleMutate = (values)=>{
-    //     mutate(values)
-    // }
-
-    
-
-    const {mutate} = useMutationPut(`https://673ef547a9bc276ec4b66ea0.mockapi.io/users/user/${id}` , 'detail')
     const handleMutate = (values)=>{
         mutate(values)
     }
+
+    
+
+    // const {mutate} = useMutationPut(`https://673ef547a9bc276ec4b66ea0.mockapi.io/users/user/${id}` , 'detail')
+    // const handleMutate = (values)=>{
+    //     mutate(values)
+    // }
     
     
     
