@@ -11,8 +11,8 @@ const CourseCard = ({item}) => {
             </div>
             <div className=' text-center flex flex-col gap-3'>
                 <h2 className='font-bold mt-4 xl:mt-4 truncate cursor-pointer  h-6' >{item.courseOrBlogName}</h2>
-                <h2 className=' h-6'>tech : {item.tech} </h2>
-                <h2 className=' h-6'>cost : {item.cost}</h2>
+                <h2 className=' h-6'>name : {item.name} </h2>
+                <h2 className=' h-6'>age : {item.age}</h2>
                 <div className='flex justify-around'>
                     <button  className=' block bg-[aqua] border-zgh border rounded-xl mx-auto xl:mr-18  py-1 px-4'> 
                         <Link to={`/Detail/${item.id}`}>detail</Link>

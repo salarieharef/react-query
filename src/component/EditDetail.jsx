@@ -2,34 +2,36 @@ import React from 'react'
 import { Formik } from 'formik';
 import { useMutation, useQueryClient } from 'react-query';
 import axios from 'axios';
+import useMutationPut from '../customHook/useMutationPut';
 
 const EditDetail = ({data , id}) => {
 
-    const handleUpdate =async ( value) => {
-        const res =await axios.put(`https://66e301e5494df9a478e3f4f6.mockapi.io/test/test/${id}` , value);
-        // console.log(res);
-        return res.data
-    }; 
+
+    // const handleUpdate =async ( value) => {
+    //     const res =await axios.put(`https://673ef547a9bc276ec4b66ea0.mockapi.io/users/user/${id}` , value);
+    //     // console.log(res);
+    //     return res.data
+    // }; 
 
 
 
-    const queryClient = useQueryClient()
+    // const queryClient = useQueryClient()
 
-    const {mutate , status } = useMutation(handleUpdate , {
-        onSuccess:(data)=>{
-            queryClient.invalidateQueries('detail')
+    // const {mutate , status } = useMutation(handleUpdate , {
+    //     onSuccess:(data)=>{
+    //         queryClient.invalidateQueries('detail')
 
-        },
+    //     }, 
 
+    // })
 
-        
-
-    })
-
-   
+    // const handleMutate = (values)=>{
+    //     mutate(values)
+    // }
 
     
 
+    const {mutate} = useMutationPut(`https://673ef547a9bc276ec4b66ea0.mockapi.io/users/user/${id}` , 'detail')
     const handleMutate = (values)=>{
         mutate(values)
     }
@@ -51,7 +53,7 @@ const EditDetail = ({data , id}) => {
             </div>
             <Formik
                 enableReinitialize
-                initialValues={{ courseOrBlogName: data.courseOrBlogName , describe:data.describe  , cost:data.cost ,  tech:data.tech }}
+                initialValues={{ name: data?.name , age:data?.age  , desc:data?.desc  }}
                 onSubmit={handleMutate}
                 >
                 {({ values, handleChange, handleSubmit , handleBlur }) => {
@@ -59,35 +61,27 @@ const EditDetail = ({data , id}) => {
                     <form onSubmit={handleSubmit}>
                         <div className='flex  justify-around gap-6 mt-6'>
                             <div className='w-1/2'>
-                                <input type="text" name='courseOrBlogName' value={values.courseOrBlogName} onChange={handleChange} placeholder="courseName" className="input input-bordered w-full" />
+                                <input type="text" name='name' value={values.name} onChange={handleChange} placeholder="name" className="input input-bordered w-full" />
                             </div>
 
                             <div className='w-1/2'>
-                                <input type="text" name='cost' value={values.cost} onChange={handleChange} placeholder="cost" className="input input-bordered w-full " />
+                                <input type="text" name='age' value={values.age} onChange={handleChange} placeholder="age" className="input input-bordered w-full " />
+                            </div>
+
+                            <div className='w-1/2'>
+                                <input type="text" name='desc' value={values.desc} onChange={handleChange} placeholder="desc" className="input input-bordered w-full " />
                             </div>
                         </div>
 
-                        <div className='flex  justify-around gap-6 mt-6'>
+                
 
-
-                            <div className='w-1/3'>
-                                <textarea name='describe' value={values.describe} onChange={handleChange} className="textarea textarea-bordered w-full" placeholder="describe"></textarea>
-                            </div>
-
-                            <div className='w-1/3'>
-                                <select name='tech' value={values.tech} onChange={handleChange} onBlur={handleBlur}  className="select select-bordered w-full max-w-xs">
-                                <option  selected>technology?</option>
-                                <option value='frontEnd'>frontEnd</option>
-                                <option value='backEnd'>backEnd</option>
-                                <option value='ai'>ai</option>
-                                </select>
-                            </div>
+ 
 
                             <button type="submit" className="btn btn-blue bg-blue-600 px-4 rounded-full mx-auto ">
                                 edit
                             </button>
 
-                        </div>
+                
 
 
 

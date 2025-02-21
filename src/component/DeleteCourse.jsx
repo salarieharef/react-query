@@ -1,29 +1,38 @@
 import axios from 'axios';
 import React from 'react'
 import { useQuery , useMutation, useQueryClient } from 'react-query'
+import useMutationDelete from '../customHook/useMutationDelete';
 
 
 const DeleteCourse = ({id}) => {
-  const queryClient = useQueryClient()
+//   const queryClient = useQueryClient()
 
 
-  const handleDel =async (id ) =>{
-    const res =await axios.delete(`https://66e301e5494df9a478e3f4f6.mockapi.io/test/test/${id}`);
-    return res.data
+//   const handleDel =async (id ) =>{
+//     const res =await axios.delete(`https://673ef547a9bc276ec4b66ea0.mockapi.io/users/user/${id}`);
+//     return res.data
 
-}
+// }
 
-const {mutate} = useMutation(handleDel,{
-  onSuccess: () => {
-    queryClient.invalidateQueries('list');
+// const {mutate} = useMutation(handleDel,{
+//   onSuccess: () => {
+//     queryClient.invalidateQueries('list');
 
-  }
-})
+//   }
+// })
 
 
+// const handleMutate = (id) =>{
+//   mutate(id)
+// }
+
+
+  
+  const {mutate} = useMutationDelete('list')
 const handleMutate = (id) =>{
-  mutate(id)
+  mutate(`https://673ef547a9bc276ec4b66ea0.mockapi.io/users/user/${id}`)
 }
+
 
 
   return (

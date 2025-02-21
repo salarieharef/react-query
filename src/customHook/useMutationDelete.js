@@ -3,16 +3,16 @@ import React, { useEffect } from 'react'
 import { useQuery , useMutation, useQueryClient } from 'react-query'
 
 
+const handleDel =async (url ) =>{
+    const res =await axios.delete(url);
+    return res.data
+}
+
 
 
 const useMutationDelete = (key) => {
     const queryClient = useQueryClient()
 
-    const handleDel =async (url ) =>{
-        const res =await axios.delete(url);
-        return res.data
-
-    }
 
     return useMutation(handleDel, {
         onSuccess: () => {

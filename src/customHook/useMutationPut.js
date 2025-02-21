@@ -6,14 +6,13 @@ const useMutationPut = (url , key) => {
     const queryClient = useQueryClient();
 
     const handlePut = async ( values) => {
-        console.log(values);
         const res = await axios.put(url, values);
         return res.data;
     };
 
     
 
-    return useMutation((obj) => handlePut(obj), {
+    return useMutation(handlePut, {
         onSuccess: () => {
             queryClient.invalidateQueries(key);
         },
